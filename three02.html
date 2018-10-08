@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>画线</title>
+	</head>
+	<body>
+		<script src="three.js-dev/build/three.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+			camera.position.set( 0, 0, 100 );
+			camera.lookAt( 0, 0, 0 );
+			
+			var scene = new THREE.Scene();
+			
+			// 定义一种材料 对于行，我们必须使用LineBasicMaterial或LineDashedMaterial
+			var material = new THREE.LineBasicMaterial({color: 0x0000ff});
+			// 创建一个包含一些定点的几何对象
+			var geometry = new THREE.Geometry();
+			geometry.vertices.push(new THREE.Vector3(-10,0,0));
+			geometry.vertices.push(new THREE.Vector3(0,10,0));
+			geometry.vertices.push(new THREE.Vector3(10,0,0));
+			geometry.vertices.push(new THREE.Vector3(0,-10,0));
+			
+			// 将几何对象和 材料组合成一条线
+			var line = new THREE.Line(geometry, material);
+			// 将组合好打线添加到场景中
+			scene.add(line);
+			renderer.render(scene, camera);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>旋转的立方体</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script src="three.js-dev/build/three.js"></script>
+  <script>
+  // 创建场景  
+    // 实例化场景对象
+    var scene = new THREE.Scene();
+    // 实例化相机对象 
+    // 参数1 视野
+    // 参数2 宽高比
+    // 参数3 近裁剪平面
+    // 参数4 远裁剪平面
+    var camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 10);
+    // 实例化渲染器对象
+    var  renderer = new THREE.WebGLRenderer();
+    // 设置渲染器大小
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    // 将渲染器对象添加到页面上
+    document.body.appendChild(renderer.domElement);
+//添加立体方块
+  //实例化 三维数据对象
+  var geometry = new THREE.BoxGeometry(1,1,1);
+  // 定义材质
+  var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+  // 创建立方体
+  var cube = new THREE.Mesh(geometry, material);
+  // 将立方体添加到场景中
+  scene.add(cube);
+  // 设置z 轴向上
+   	camera.position.z = 5;
+// 渲染数据 动画循环
+  function animate() {
+  	//使渲染器在每次刷新屏幕时绘制场景
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.1;
+    cube.rotation.y += 0.1;
+    renderer.render(scene, camera);
+  }
+  animate()
+  </script>
+</body>
+</html>
